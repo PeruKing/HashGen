@@ -102,9 +102,3 @@ while True:
             print("Die Hashwerte sind identisch")
         else:
             print("Die Hashwerte sind nicht identisch")
-    
-
-
-
-
-
