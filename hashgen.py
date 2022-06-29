@@ -11,7 +11,7 @@ while True:
     sha256_hash = hashlib.sha256()
     sha512_hash = hashlib.sha512()
 
-    # Metode auswählen
+    # Methode auswählen
     while True:
         auswahl = input("\nWähle ein Hash-Methode aus: ")
         if auswahl == "md5" or auswahl == "sha1" or auswahl == "sha256" or auswahl == "sha512":
@@ -19,7 +19,7 @@ while True:
         else:
             print("Du kannst md5, sha1, sha256 oder sha512 auswählen")
 
-    # Datei oder str auswhählen
+    # Datei oder str auswählen
     while True:
         str_file = input("\nWillst du einen Hash-Wert aus einer Datei(d) erstellen oder aus einem String(s)? ")
         if str_file == "d" or str_file == "s":
@@ -48,7 +48,7 @@ while True:
             wert = sha512_hash.hexdigest()
             print(sha512_hash.hexdigest())
         
-        # Hashwert miteinader vergleichen
+        # Hashwert miteinander vergleichen
         com_hash = input("\nBitte gib den Hashwert ein mit dem du den Hashwert vergleichen willst: ")
         if wert == com_hash:
             print(wert)
@@ -60,18 +60,17 @@ while True:
     # Datei Hashwert erstellen        
     if str_file == "d":
         file = input ("\nBitte gib den Pfad zur Datei ein: ")
-        # Block größe die pro lesedurchgang verarbeitet werden soll 
+        # Block größe die pro Lesedurchgang verarbeitet werden soll 
         BLOCK_SIZE = 65536
         
         # Datei öffnen
         with open(file, 'rb') as f:
             # Datei lesen
             fb = f.read(BLOCK_SIZE) 
-            # Soll die Datei solange lesen bis das noch Size ist
+            # Soll die Datei solange lesen bis noch Size über ist
             if auswahl == "md5":
                 while len(fb) > 0:
                     md5_hash.update(fb)
-                    # Nochsten block der Datei lesen
                     fb = f.read(BLOCK_SIZE)
                 # Hashwert ausgeben
                 print (md5_hash.hexdigest())
