@@ -8,17 +8,21 @@ while True:
     # Methode auswählen
     while True:
         auswahl = input("\nWähle ein Hash-Methode aus: ")
-        if auswahl == "md5" or auswahl == "sha1" or auswahl == "sha256" or auswahl == "sha512":
+        if auswahl == "md5" or auswahl == "sha1" or auswahl == "sha224" or auswahl == "sha256" or auswahl == "sha384" or auswahl == "sha512":
             break
         else:
-            print("Du kannst md5, sha1, sha256 oder sha512 auswählen")
+            print("Du kannst md5, sha1, sha224, sha256, sha384 oder sha512 auswählen")
 
     if auswahl == "md5":
         hashval = hashlib.md5()
     if auswahl == "sha1":
         hashval = hashlib.sha1()
+    if auswahl == "sha224":
+        hashval = hashlib.sha224()
     if auswahl == "sha256":
         hashval = hashlib.sha256()
+    if auswahl == "sha384":
+        hashval = hashlib.sha384()
     if auswahl == "sha512":
         hashval = hashlib.sha512()
     
