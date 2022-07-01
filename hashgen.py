@@ -5,12 +5,6 @@ from traceback import print_tb
 tprint("Hash Generator\nby\nPeruKingo")
 
 while True:
-    # Hash Algorithmus in Variable speichern
-    md5_hash = hashlib.md5()
-    sha1_hash = hashlib.sha1()
-    sha256_hash = hashlib.sha256()
-    sha512_hash = hashlib.sha512()
-
     # Methode auswählen
     while True:
         auswahl = input("\nWähle ein Hash-Methode aus: ")
@@ -19,36 +13,23 @@ while True:
         else:
             print("Du kannst md5, sha1, sha256 oder sha512 auswählen")
 
-    # Datei oder str auswählen
-    while True:
-        str_file = input("\nWillst du einen Hash-Wert aus einer Datei(d) erstellen oder aus einem String(s)? ")
-        if str_file == "d" or str_file == "s":
-            break
+    if auswahl == "md5":
+        hashval = hashlib.md5()
+    if auswahl == "sha1":
+        hashval = hashlib.sha1()
+    if auswahl == "sha256":
+        hashval = hashlib.sha256()
+    if auswahl == "sha512":
+        hashval = hashlib.sha512()
     
-    # str Hashwert erstellen   
-    if str_file == "s":
+    # Funktion um String Hash zu bestimmen
+    def hashcalstr():
         str_hash = input("\nBitte gib dein String ein: ")
-        # str in byte encoden
         str_hash = str_hash.encode()
-        if auswahl == "md5":
-            md5_hash.update(str_hash)
-            wert = md5_hash.hexdigest()
-            # Hashwert ausgeben
-            print(md5_hash.hexdigest())
-        if auswahl == "sha1":
-            sha1_hash.update(str_hash)
-            wert = sha1_hash.hexdigest()
-            print(sha1_hash.hexdigest())
-        if auswahl == "sha256":
-            sha256_hash.update(str_hash)
-            wert = sha256_hash.hexdigest()
-            print(sha256_hash.hexdigest())
-        if auswahl == "sha512":
-            sha512_hash.update(str_hash)
-            wert = sha512_hash.hexdigest()
-            print(sha512_hash.hexdigest())
-        
-        # Hashwert miteinander vergleichen
+        hashval.update(str_hash)
+        wert = hashval.hexdigest()
+        print(hashval.hexdigest())
+        # Hashwert abgleichen
         com_hash = input("\nBitte gib den Hashwert ein mit dem du den Hashwert vergleichen willst: ")
         if wert == com_hash:
             print(wert)
@@ -57,44 +38,21 @@ while True:
         else:
             print("Die Hashwerte sind nicht identisch")
     
-    # Datei Hashwert erstellen        
-    if str_file == "d":
+    # Funktion um Datei Hash zu bestimmen      
+    def hashcatfile():
         file = input ("\nBitte gib den Pfad zur Datei ein: ")
-        # Block größe die pro Lesedurchgang verarbeitet werden soll 
+        # Block größe die pro Lesedurchgang verarbeitet werden soll
         BLOCK_SIZE = 65536
-        
         # Datei öffnen
         with open(file, 'rb') as f:
             # Datei lesen
             fb = f.read(BLOCK_SIZE) 
-            # Soll die Datei solange lesen bis noch Size über ist
-            if auswahl == "md5":
-                while len(fb) > 0:
-                    md5_hash.update(fb)
-                    fb = f.read(BLOCK_SIZE)
-                # Hashwert ausgeben
-                print (md5_hash.hexdigest())
-                wert_file = md5_hash.hexdigest()
-            if auswahl == "sha1":
-                while len(fb) > 0:
-                    sha1_hash.update(fb)
-                    fb = f.read(BLOCK_SIZE)
-                print (sha1_hash.hexdigest())
-                wert_file = sha1_hash.hexdigest()
-            if auswahl == "sha256":
-                while len(fb) > 0:
-                    sha256_hash.update(fb)
-                    fb = f.read(BLOCK_SIZE)
-                print (sha256_hash.hexdigest())
-                wert_file = sha256_hash.hexdigest()
-            if auswahl == "sha512":
-                while len(fb) > 0:
-                    sha512_hash.update(fb)
-                    fb = f.read(BLOCK_SIZE)
-                print (sha512_hash.hexdigest()) 
-                wert_file = sha512_hash.hexdigest()
-                
-        # Hashwert miteinader vergleichen
+            # Solange lesen bis noch Size über ist
+            while len(fb) > 0:
+                hashval.update(fb)
+                fb = f.read(BLOCK_SIZE)
+        print (hashval.hexdigest())
+        wert_file = hashval.hexdigest()
         com_hash = input("\nBitte gib den Hashwert ein mit dem du den Hashwert vergleichen willst: ")
         if wert_file == com_hash:
             print(wert_file)
@@ -102,3 +60,15 @@ while True:
             print("Die Hashwerte sind identisch")
         else:
             print("Die Hashwerte sind nicht identisch")
+    
+    # Datei oder str auswählen
+    while True:
+        str_file = input("\nWillst du einen Hash-Wert aus einer Datei(d) erstellen oder aus einem String(s)? ")
+        if str_file == "d" or str_file == "s":
+            break
+
+    if str_file == "s": 
+        hashcalstr()
+        
+    if str_file == "d":
+        hashcatfile()
