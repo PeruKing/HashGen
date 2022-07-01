@@ -31,6 +31,7 @@ while True:
         print(hashval.hexdigest())
         # Hashwert abgleichen
         com_hash = input("\nBitte gib den Hashwert ein mit dem du den Hashwert vergleichen willst: ")
+        com_hash = com_hash.lower()
         if wert == com_hash:
             print(wert)
             print(com_hash)
@@ -54,6 +55,7 @@ while True:
         print (hashval.hexdigest())
         wert_file = hashval.hexdigest()
         com_hash = input("\nBitte gib den Hashwert ein mit dem du den Hashwert vergleichen willst: ")
+        com_hash = com_hash.lower()
         if wert_file == com_hash:
             print(wert_file)
             print(com_hash)
